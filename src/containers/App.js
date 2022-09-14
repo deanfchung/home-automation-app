@@ -1,38 +1,40 @@
 import { useState, useEffect } from 'react';
 import '../index.css';
-import RoomSelect from '../components/RoomSelect';
-import RoomTemperature from '../components/RoomTemperature';
+import Temperature from '../components/Temperature';
 import useAutomation from '../hooks/hooks';
 
-function App() {
-	const [activeRoom, setActiveRoom] = useState(0);
-	const [temperature, setTemperature] = useState(70);
+const App = () => {
+	const [temperature, setTemperature] = useState(0);
 	const [blinds, setBlinds] = useState(0);
 	const [lights, setLights] = useState([
 		{ id: 'bedroom', status: 0 },
 		{ id: 'kitchen', status: 1 },
 		{ id: 'livingRoom', status: 1 },
 	]);
-	const { getStatus } = useAutomation();
+
+	const { getStatus, updateTemperature } = useAutomation(
+		setTemperature,
+		setBlinds,
+		setLights
+	);
 
 	useEffect(() => {
-		getStatus(setTemperature, setBlinds, setLights);
+		getStatus();
 	}, [getStatus]);
+
 	return (
 		<>
 			<div>
-				<RoomSelect
-					setActiveRoom={setActiveRoom}
-					activeRoom={activeRoom}
+				<Temperature
+					temperature={temperature}
+					updateTemperature={updateTemperature}
+					setTemperature={setTemperature}
 				/>
 			</div>
-			<div>
-				<RoomTemperature temperature={temperature} />
-			</div>
-			<div>Curtains</div>
 			<div>Lights</div>
+			<div>Blinds</div>
 		</>
 	);
-}
+};
 
 export default App;

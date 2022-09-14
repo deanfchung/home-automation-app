@@ -1,8 +1,7 @@
 const express = require('express');
-// const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const homeAutoData = require('./data');
+const initialData = require('./data');
 
 const app = express();
 const port = 3001;
@@ -11,12 +10,12 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// // Set up routing
-// routes.configure(app);
+app.get('/api/status', (req, res) => {
+	res.json(initialData);
+});
 
-app.get('/api/homestatus', (req, res) => {
-	console.log('homestatus: ', req, res);
-	res.json(homeAutoData);
+app.patch('/api/temperature', (req, res) => {
+	res.status(200).json(`Temperature updated to ${req.body.temperature}`);
 });
 
 //uncaught route handler
