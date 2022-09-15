@@ -8,7 +8,7 @@ import useAutomation from '../hooks/hooks';
 
 const App = () => {
 	// We are skipping state management with redux or flux here because our app only needs to pass props down one level
-	const [temperature, setTemperature] = useState(0);
+	const [temperature, setTemperature] = useState(70);
 	const [blinds, setBlinds] = useState(1);
 	const [lights, setLights] = useState([
 		{ id: 0, value: 'bedroom', status: 0 },
