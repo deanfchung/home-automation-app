@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 const Temperature = ({ temperature, updateTemperature }) => {
 	const handleAdd = () => {
-		if (temperature === 90) return;
-		updateTemperature(temperature + 1);
+		if (temperature === 90) return; // set maximum temp
+		updateTemperature(temperature + 1); // increment
 	};
 	const handleSubtract = () => {
-		if (temperature === 60) return;
-		updateTemperature(temperature - 1);
+		if (temperature === 60) return; // set minimum temp
+		updateTemperature(temperature - 1); // decrement
 	};
 
 	return (

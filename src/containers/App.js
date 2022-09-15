@@ -11,19 +11,16 @@ const App = () => {
 	const [temperature, setTemperature] = useState(0);
 	const [blinds, setBlinds] = useState(1);
 	const [lights, setLights] = useState([
-		{ id: 'bedroom', status: 0 },
-		{ id: 'kitchen', status: 1 },
-		{ id: 'livingRoom', status: 1 },
+		{ id: 0, value: 'bedroom', status: 0 },
+		{ id: 1, value: 'kitchen', status: 1 },
+		{ id: 2, value: 'livingRoom', status: 1 },
 	]);
 
-	const { getStatus, updateTemperature, updateBlinds } = useAutomation(
-		setTemperature,
-		setBlinds,
-		setLights
-	);
+	const { getStatus, updateTemperature, updateBlinds, updateLights } =
+		useAutomation(setTemperature, setBlinds, setLights); //extract functions to interact with server
 
 	useEffect(() => {
-		getStatus();
+		getStatus(); //call api when we open app and populate state
 	}, [getStatus]);
 
 	return (
@@ -32,11 +29,13 @@ const App = () => {
 				<Temperature
 					temperature={temperature}
 					updateTemperature={updateTemperature}
-					setTemperature={setTemperature}
 				/>
 			</Tile>
 			<Tile>
-				<Lights />
+				<Lights
+					lights={lights}
+					updateLights={updateLights}
+				/>
 			</Tile>
 			<Tile>
 				<Blinds

@@ -50,6 +50,24 @@ const useAutomation = (setTemperature, setBlinds, setLights) => {
 		}
 	};
 
+	const updateLights = async (lights) => {
+		try {
+			const response = await fetch('api/lights', {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				method: 'PATCH',
+				body: JSON.stringify({ lights }),
+			});
+			const message = await response.json();
+			console.log(message);
+			setLights(lights);
+		} catch (err) {
+			console.error('Unable to update lights: ', err);
+		}
+	};
+
 	return {
 		getStatus: useCallback(getStatus, [
 			setTemperature,
@@ -58,6 +76,7 @@ const useAutomation = (setTemperature, setBlinds, setLights) => {
 		]),
 		updateTemperature,
 		updateBlinds,
+		updateLights,
 	};
 };
 
