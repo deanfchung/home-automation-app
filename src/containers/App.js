@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import '../index.css';
 import Temperature from '../components/Temperature';
+import Lights from '../components/Lights';
+import Blinds from '../components/Blinds';
 import useAutomation from '../hooks/hooks';
 
 const App = () => {
+	// We are skipping state management with redux or flux here because our app only needs to pass props down one level
 	const [temperature, setTemperature] = useState(0);
 	const [blinds, setBlinds] = useState(0);
 	const [lights, setLights] = useState([
@@ -23,18 +27,39 @@ const App = () => {
 	}, [getStatus]);
 
 	return (
-		<>
-			<div>
+		<Main>
+			<Tile>
 				<Temperature
 					temperature={temperature}
 					updateTemperature={updateTemperature}
 					setTemperature={setTemperature}
 				/>
-			</div>
-			<div>Lights</div>
-			<div>Blinds</div>
-		</>
+			</Tile>
+			<Tile>
+				<Lights />
+			</Tile>
+			<Tile>
+				<Blinds />
+			</Tile>
+		</Main>
 	);
 };
+
+const Main = styled.main`
+	display: flex;
+	justify-content: center;
+	margin-top: 10rem;
+	flex-direction: column;
+	@media (max-width: 35rem) {
+		flex-direction: column;
+	}
+	@media (min-width: 35rem) {
+		flex-direction: row;
+	}
+`;
+
+const Tile = styled.div`
+	margin: 0.5rem;
+`;
 
 export default App;
