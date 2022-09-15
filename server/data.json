@@ -3,15 +3,18 @@
 		"temperature": 70,
 		"lights": [
 			{
-				"id": "bedroom",
+				"id": 0,
+				"value": "bedroom",
 				"status": 0
 			},
 			{
-				"id": "kitchen",
+				"id": 1,
+				"value": "kitchen",
 				"status": 1
 			},
 			{
-				"id": "livingRoom",
+				"id": "2",
+				"value": "livingRoom",
 				"status": 1
 			}
 		],

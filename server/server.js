@@ -11,17 +11,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/api/status', (req, res) => {
-	res.json(initialData);
+	res.json(initialData); //respond with initial data
 });
 
 app.patch('/api/temperature', (req, res) => {
-	res.status(200).json(`Temperature updated to ${req.body.temperature}`);
+	res.status(200).json(`Temperature updated to ${req.body.temperature}`); //handle temperature endpoint
 });
 
 app.patch('/api/blinds', (req, res) => {
 	res.status(200).json(
-		`Blinds successfully updated to ${!req.body.status ? 'Open' : 'Closed'}`
+		`Blinds successfully updated to ${!req.body.status ? 'Open' : 'Closed'}` //handle blinds endpoint
 	);
+});
+
+app.patch('/api/lights', (req, res) => {
+	res.status(200).json(`Lights successfully updated`); //handle lights endpoint
 });
 
 //uncaught route handler
