@@ -13,6 +13,7 @@ const useAutomation = (setTemperature, setBlinds, setLights) => {
 			console.error('error fetching statuses: ', err);
 		}
 	};
+
 	const updateTemperature = async (temperature) => {
 		try {
 			const response = await fetch('api/temperature', {
@@ -30,6 +31,25 @@ const useAutomation = (setTemperature, setBlinds, setLights) => {
 			console.error('error updating temperature: ', err);
 		}
 	};
+
+	const updateBlinds = async (status) => {
+		try {
+			const response = await fetch('api/blinds', {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				method: 'PATCH',
+				body: JSON.stringify({ status }),
+			});
+			const message = await response.json();
+			console.log(message);
+			setBlinds(status);
+		} catch (err) {
+			console.error('Unable to update blind status: ', err);
+		}
+	};
+
 	return {
 		getStatus: useCallback(getStatus, [
 			setTemperature,
@@ -37,6 +57,7 @@ const useAutomation = (setTemperature, setBlinds, setLights) => {
 			setLights,
 		]),
 		updateTemperature,
+		updateBlinds,
 	};
 };
 

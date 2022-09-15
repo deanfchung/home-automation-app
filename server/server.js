@@ -18,6 +18,12 @@ app.patch('/api/temperature', (req, res) => {
 	res.status(200).json(`Temperature updated to ${req.body.temperature}`);
 });
 
+app.patch('/api/blinds', (req, res) => {
+	res.status(200).json(
+		`Blinds successfully updated to ${!req.body.status ? 'Open' : 'Closed'}`
+	);
+});
+
 //uncaught route handler
 app.get('*', (req, res) => {
 	res.sendStatus(404);

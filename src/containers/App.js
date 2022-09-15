@@ -9,14 +9,14 @@ import useAutomation from '../hooks/hooks';
 const App = () => {
 	// We are skipping state management with redux or flux here because our app only needs to pass props down one level
 	const [temperature, setTemperature] = useState(0);
-	const [blinds, setBlinds] = useState(0);
+	const [blinds, setBlinds] = useState(1);
 	const [lights, setLights] = useState([
 		{ id: 'bedroom', status: 0 },
 		{ id: 'kitchen', status: 1 },
 		{ id: 'livingRoom', status: 1 },
 	]);
 
-	const { getStatus, updateTemperature } = useAutomation(
+	const { getStatus, updateTemperature, updateBlinds } = useAutomation(
 		setTemperature,
 		setBlinds,
 		setLights
@@ -39,7 +39,10 @@ const App = () => {
 				<Lights />
 			</Tile>
 			<Tile>
-				<Blinds />
+				<Blinds
+					blinds={blinds}
+					updateBlinds={updateBlinds}
+				/>
 			</Tile>
 		</Main>
 	);
